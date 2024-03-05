@@ -7,14 +7,17 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
-
 #MacOS Path
 if [[ "$(uname)" == "Darwin" ]]; then
     export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+    export PATH="$PATH:$HOME/velox"
+    #Go Path
+    export GOPATH="$HOME/go"
+    export PATH="$GOPATH/bin:$PATH"
     #Node Path
     export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
+else
+    export PATH="$PATH:/usr/local/go/bin:$PATH"
 fi
 
 # Path to your oh-my-zsh installation.
@@ -77,12 +80,13 @@ unset __conda_setup
 #General (All OSes)
 alias ls="exa"
 alias c="clear"
+alias bupd="brew update && brew upgrade"
+alias bi="brew install"
+alias bs="brew search"
 
 if [[ "$(uname)" == "Darwin" ]]; then
     #MacOS aliases
-    alias bupd="brew update && brew upgrade"
-    alias bi="brew install"
-    alias bs="brew search"
+    alias zed="open -a /Applications/Zed.app -n"
     alias reboot="sudo reboot"
     alias shutdown="sudo shutdown now"
 
@@ -93,13 +97,15 @@ elif [[ "$(uname)" == "Linux" ]]; then
         alias pup="sudo pacman -Syu" 
         alias ps="pacman -Ss"
         alias pi="sudo pacman -S $1 -y"
+        alias pr="sudo pacman -R $1 -y"
         alias shutdown="shutdown now"
 
     elif type apt >/dev/null 2>&1 ; then
         # Ubuntu/Debian aliases
-        alias aptup="sudo apt update && sudo apt upgrade"
+        alias aptup="sudo apt update && sudo apt upgrade -y"
         alias as="apt search"
         alias apti="sudo apt install $1 -y"
+        alias aptr="sudo apt remove $1 -y"
         alias shutdown="shutdown now"
 
     elif type dnf >/dev/null 2>&1 ; then
@@ -107,6 +113,7 @@ elif [[ "$(uname)" == "Linux" ]]; then
         alias dnfu="sudo dnf update && sudo dnf upgrade -y"
         alias dnfs="dnf search"
         alias dnfi="sudo dnf install $1 -y"
+        alias dnfr="sudo dnf remove $1 -y"
         alias shutdown="shutdown now"
     fi
 fi  
