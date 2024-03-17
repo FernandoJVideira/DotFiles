@@ -128,9 +128,13 @@ fi
 if ask "Install Homebrew?"; then
     echo "Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    
     # Add Homebrew to path
-
-    echo "export PATH=~/miniconda3/bin:$PATH" >> ~/.${shell}rc
+    if [ "$os" == "Darwin" ]; then
+        echo "eval $(/opt/homebrew/bin/brew shellenv)" >> ~/.${shell}rc
+    else
+        echo "eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" >> ~/.${shell}rc
+    fi
 fi
 
 if ask "Install tmux?"; then
