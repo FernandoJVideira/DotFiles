@@ -64,17 +64,21 @@ if ask "Change shell to zsh?"; then
     # Source Distro-specific aliases
     if [ "$os" == "Darwin" ]; then
         echo "Installing MacOS Aliases..."
-        echo "source shell/mac/macos_aliases.sh" >> ~/.zshrc
+        fullpath=$(realpath shell/mac/macos_aliases.sh)
+        echo "source $fullpath" >> ~/.zshrc
     else
         if type apt >/dev/null 2>&1 ; then
             echo "Installing Ubuntu/Debian Settings..."
-            echo "source shell/debian/debian_aliases.sh" >> ~/.zshrc
+            fullpath=$(realpath shell/debian/debian_aliases.sh)
+            echo "source $fullpath" >> ~/.zshrc
         elif type pacman >/dev/null 2>&1 ; then
             echo "Installing Arch-based Aliases..."
-            echo "source shell/arch/arch_aliases.sh" >> ~/.zshrc
+            fullpath=$(realpath shell/arch/arch_aliases.sh)
+            echo "source $fullpath" >> ~/.zshrc
         elif type dnf >/dev/null 2>&1 ; then
             echo "Installing Fedora Aliases..."
-            echo "source shell/fedora/fedora_aliases.sh" >> ~/.zshrc
+            fullpath=$(realpath shell/fedora/fedora_aliases.sh)
+            echo "source $fullpath" >> ~/.zshrc
         fi
     fi
 
@@ -113,7 +117,8 @@ if ask "Change shell to zsh?"; then
     fi
 
     if ask "Use fzf as the default cd command?"; then
-        echo "source shell/fzf/fzf_cd.sh" >> ~/.zshrc
+        fullpath=$(realpath shell/fzf/fzf_cd.sh)
+        echo "source $fullpath" >> ~/.zshrc
     fi
 fi
 
