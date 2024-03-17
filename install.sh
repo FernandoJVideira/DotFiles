@@ -106,7 +106,7 @@ if ask "Change shell to zsh?"; then
         ~/.fzf/install
 
         # Set plugins
-        plugins="plugins(git zsh-autosuggestions zsh-syntax-highlighting web-search gh macos)"
+        plugins="plugins(git zsh-autosuggestions zsh-syntax-highlighting web-search gh)"
         #Get line number of plugins line in .zshrc
         line_number=$(grep -n "plugins=(" ~/.zshrc | cut -d: -f1)
         #Replace plugins line with new plugins
