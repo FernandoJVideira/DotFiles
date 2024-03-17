@@ -55,15 +55,12 @@ if ask "Change shell to zsh?"; then
         if type apt >/dev/null 2>&1 ; then
             echo "Installing Ubuntu/Debian Settings..."
             echo "source shell/debian/debian_aliases.sh" >> ~/.zshrc
-        fi
         elif type pacman >/dev/null 2>&1 ; then
             echo "Installing Arch-based Aliases..."
             echo "source shell/arch/arch_aliases.sh" >> ~/.zshrc
-        fi
         elif type dnf >/dev/null 2>&1 ; then
             echo "Installing Fedora Aliases..."
             echo "source shell/fedora/fedora_aliases.sh" >> ~/.zshrc
-        fi
     fi
 
     if ask "Install oh-my-zsh?"; then
