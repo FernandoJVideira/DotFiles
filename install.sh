@@ -17,7 +17,7 @@ os=$(uname)
 echo "Current shell: $SHELL"
 shell=$(basename $SHELL)
 
-if ["$shell" == "zsh"]; then
+if [ "$shell" == "zsh" ]; then
     echo "Zsh is already installed"
 else
     echo "Zsh is not installed"
@@ -47,7 +47,7 @@ if ask "Change shell to zsh?"; then
     done
 
     # Source Distro-specific aliases
-    if ["$os" == "Darwin"]; then
+    if [ "$os" == "Darwin" ]; then
         echo "Installing MacOS Aliases..."
         echo "source shell/mac/macos_aliases.sh" >> ~/.zshrc
     fi
@@ -100,7 +100,7 @@ fi
 
 if ask "Install conda?"; then
     echo "Installing conda..."
-    if ["$os" == "Darwin"]; then
+    if [ "$os" == "Darwin" ]; then
         mkdir -p ~/miniconda3
         curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -o ~/miniconda3/miniconda.sh
         bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
@@ -146,7 +146,7 @@ fi
 
 if ask "Install tmux?"; then
     echo "Installing tmux..."
-    if ["$os" == "Darwin"]; then
+    if [ "$os" == "Darwin" ]; then
         brew install tmux
     else
         if type apt >/dev/null 2>&1 ; then
@@ -163,5 +163,3 @@ fi
 if ask "Do you want to install .tmux.conf?"; then
     ln -s "$(realpath ".tmux.conf")" ~/.tmux.conf
 fi
-
-echo "Installation complete. Please restart your terminal."
