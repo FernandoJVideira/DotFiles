@@ -22,7 +22,7 @@ if [ "$shell" == "zsh" ]; then
 else
     echo "Zsh is not installed"
     echo "Installing zsh..."
-    if ["$os" == "Linux"]; then
+    if [ "$os" == "Linux" ]; then
         if type apt >/dev/null 2>&1 ; then
             sudo apt install zsh
         elif type pacman >/dev/null 2>&1 ; then
@@ -50,7 +50,6 @@ if ask "Change shell to zsh?"; then
     if [ "$os" == "Darwin" ]; then
         echo "Installing MacOS Aliases..."
         echo "source shell/mac/macos_aliases.sh" >> ~/.zshrc
-    fi
     else
         if type apt >/dev/null 2>&1 ; then
             echo "Installing Ubuntu/Debian Settings..."
@@ -61,6 +60,7 @@ if ask "Change shell to zsh?"; then
         elif type dnf >/dev/null 2>&1 ; then
             echo "Installing Fedora Aliases..."
             echo "source shell/fedora/fedora_aliases.sh" >> ~/.zshrc
+        fi
     fi
 
     if ask "Install oh-my-zsh?"; then
