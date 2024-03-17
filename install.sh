@@ -29,6 +29,7 @@ else
             sudo pacman -S zsh
         elif type dnf >/dev/null 2>&1 ; then
             sudo dnf install zsh
+        fi
     fi
 fi
 
