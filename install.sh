@@ -130,6 +130,7 @@ if ask "Install exa?"; then
             sudo pacman -S exa
         elif type dnf >/dev/null 2>&1 ; then
             sudo dnf install exa
+        fi
     fi
 fi
 
