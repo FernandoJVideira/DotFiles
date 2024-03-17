@@ -48,8 +48,15 @@ else
 fi
 
 if ask "Change shell to zsh?"; then
-    echo "Changing shell to zsh..."
-    chsh -s $(which zsh)
+    if ask "Install oh-my-zsh?"; then
+        echo "Installing oh-my-zsh..."
+        if ! command -v curl >/dev/null 2>&1 ; then
+            # Install curl
+            install curl
+        fi
+        # Install oh-my-zsh
+        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
 
     for file in shell/* 
     do
@@ -80,16 +87,6 @@ if ask "Change shell to zsh?"; then
             fullpath=$(realpath shell/fedora/fedora_aliases.sh)
             echo "source $fullpath" >> ~/.zshrc
         fi
-    fi
-
-    if ask "Install oh-my-zsh?"; then
-        echo "Installing oh-my-zsh..."
-        if ! command -v curl >/dev/null 2>&1 ; then
-            # Install curl
-            install curl
-        fi
-        # Install oh-my-zsh
-        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     fi
 
     if ask "Install and set zsh plugins?"; then
