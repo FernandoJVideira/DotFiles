@@ -98,68 +98,70 @@ if ask "Change shell to zsh?"; then
     fi
 fi
 
-    if ask "Install conda?"; then
-        echo "Installing conda..."
-        if ["$os" == "Darwin"]; then
-            mkdir -p ~/miniconda3
-            curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -o ~/miniconda3/miniconda.sh
-            bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
-            rm -rf ~/miniconda3/miniconda.sh
-        else
-            mkdir -p ~/miniconda3
-            wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
-            bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
-            rm -rf ~/miniconda3/miniconda.sh
-        fi
-        # Add conda to path
-        if [ "$shell" == "zsh" ]; then
-            echo "export PATH=~/miniconda3/bin:$PATH" >> ~/.zshrc
-        elif [ "$shell" == "bash" ]; then
-            echo "export PATH=~/miniconda3/bin:$PATH" >> ~/.bashrc
-        fi
+if ask "Install conda?"; then
+    echo "Installing conda..."
+    if ["$os" == "Darwin"]; then
+        mkdir -p ~/miniconda3
+        curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh -o ~/miniconda3/miniconda.sh
+        bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+        rm -rf ~/miniconda3/miniconda.sh
+    else
+        mkdir -p ~/miniconda3
+        wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+        bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+        rm -rf ~/miniconda3/miniconda.sh
     fi
-    
-    if ask "Install exa?"; then
-        echo "Installing exa..."
-        if ["$os" == "Darwin"]; then
-            brew install exa
-        else
-            if type apt >/dev/null 2>&1 ; then
-                sudo apt install exa
-            elif type pacman >/dev/null 2>&1 ; then
-                sudo pacman -S exa
-            elif type dnf >/dev/null 2>&1 ; then
-                sudo dnf install exa
-        fi
+    # Add conda to path
+    if [ "$shell" == "zsh" ]; then
+        echo "export PATH=~/miniconda3/bin:$PATH" >> ~/.zshrc
+    elif [ "$shell" == "bash" ]; then
+        echo "export PATH=~/miniconda3/bin:$PATH" >> ~/.bashrc
     fi
+fi
 
-    if ask "Install Homebrew?"; then
-        echo "Installing Homebrew..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        # Add Homebrew to path
-        if [ "$shell" == "zsh" ]; then
-            echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.zshrc
-        elif [ "$shell" == "bash" ]; then
-            echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.bashrc
+if ask "Install exa?"; then
+    echo "Installing exa..."
+    if ["$os" == "Darwin"]; then
+        brew install exa
+    else
+        if type apt >/dev/null 2>&1 ; then
+            sudo apt install exa
+        elif type pacman >/dev/null 2>&1 ; then
+            sudo pacman -S exa
+        elif type dnf >/dev/null 2>&1 ; then
+            sudo dnf install exa
+    fi
+fi
+
+if ask "Install Homebrew?"; then
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # Add Homebrew to path
+    if [ "$shell" == "zsh" ]; then
+        echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.zshrc
+    elif [ "$shell" == "bash" ]; then
+        echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.bashrc
+    fi
+fi
+
+if ask "Install tmux?"; then
+    echo "Installing tmux..."
+    if ["$os" == "Darwin"]; then
+        brew install tmux
+    else
+        if type apt >/dev/null 2>&1 ; then
+            sudo apt install tmux
+        elif type pacman >/dev/null 2>&1 ; then
+            sudo pacman -S tmux
+        elif type dnf >/dev/null 2>&1 ; then
+            sudo dnf install tmux
         fi
     fi
+fi
 
-    if ask "Install tmux?"; then
-        echo "Installing tmux..."
-        if ["$os" == "Darwin"]; then
-            brew install tmux
-        else
-            if type apt >/dev/null 2>&1 ; then
-                sudo apt install tmux
-            elif type pacman >/dev/null 2>&1 ; then
-                sudo pacman -S tmux
-            elif type dnf >/dev/null 2>&1 ; then
-                sudo dnf install tmux
-        fi
-    fi
+# Tmux conf
+if ask "Do you want to install .tmux.conf?"; then
+    ln -s "$(realpath ".tmux.conf")" ~/.tmux.conf
+fi
 
-    # Tmux conf
-    if ask "Do you want to install .tmux.conf?"; then
-        ln -s "$(realpath ".tmux.conf")" ~/.tmux.conf
-    fi
 echo "Installation complete. Please restart your terminal."
