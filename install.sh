@@ -15,9 +15,11 @@ function ask() {
 os=$(uname)
 for file in shell/* 
 do
-    fullpath=$(realpath $file)
-    if ask "Source ${file}?"; then
-        echo "source $fullpath" >> ~/.zshrc
+    if [ -f "$file" ]; then
+        fullpath=$(realpath $file)
+        if ask "Source ${file}?"; then
+            echo "source $fullpath" >> ~/.zshrc
+        fi
     fi
 done
 
@@ -25,8 +27,8 @@ done
 if ["$os" == "Darwin"]; then
     echo "Installing MacOS Aliases..."
     echo "source shell/mac/macos_aliases.sh" >> ~/.zshrc
-done
-eli
+fi
+else
     if type apt >/dev/null 2>&1 ; then
         echo "Installing Ubuntu/Debian Settings..."
         echo "source shell/debian/debian_aliases.sh" >> ~/.zshrc
