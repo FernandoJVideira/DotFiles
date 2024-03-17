@@ -104,10 +104,8 @@ if ask "Change shell to zsh?"; then
 
         # Set plugins
         plugins="plugins(git zsh-autosuggestions zsh-syntax-highlighting web-search gh)"
-        #Get line number of plugins line in .zshrc
-        line_number=$(grep -n "plugins=(" ~/.zshrc | cut -d: -f1)
-        #Replace plugins line with new plugins
-        sed -i "${line_number}s/.*/$plugins/" ~/.zshrc 
+
+        sed -i 's/plugins(git)/$plugins' ~/.zshrc 
         #Add zsh-interactive-cd plugin
         echo "source $ZSH/plugins/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh" >> ~/.zshrc
         echo "source $ZSH/oh-my-zsh.sh" >> ~/.zshrc
