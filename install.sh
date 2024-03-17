@@ -80,7 +80,7 @@ if ask "Change shell to zsh?"; then
 
     if ask "Install oh-my-zsh?"; then
         echo "Installing oh-my-zsh..."
-        if command -v curl >/dev/null 2>&1 ; then
+        if ! command -v curl >/dev/null 2>&1 ; then
             # Install curl
             install curl
         fi
