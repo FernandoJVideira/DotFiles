@@ -13,35 +13,6 @@ function ask() {
 }
 
 os=$(uname)
-for file in shell/* 
-do
-    if [ -f "$file" ]; then
-        fullpath=$(realpath $file)
-        if ask "Source ${file}?"; then
-            echo "source $fullpath" >> ~/.zshrc
-        fi
-    fi
-done
-
-# Source Distro-specific aliases
-if ["$os" == "Darwin"]; then
-    echo "Installing MacOS Aliases..."
-    echo "source shell/mac/macos_aliases.sh" >> ~/.zshrc
-fi
-else
-    if type apt >/dev/null 2>&1 ; then
-        echo "Installing Ubuntu/Debian Settings..."
-        echo "source shell/debian/debian_aliases.sh" >> ~/.zshrc
-    fi
-    elif type pacman >/dev/null 2>&1 ; then
-        echo "Installing Arch-based Aliases..."
-        echo "source shell/arch/arch_aliases.sh" >> ~/.zshrc
-    fi
-    elif type dnf >/dev/null 2>&1 ; then
-        echo "Installing Fedora Aliases..."
-        echo "source shell/fedora/fedora_aliases.sh" >> ~/.zshrc
-    fi
-fi
 
 echo "Current shell: $SHELL"
 shell=$(basename $SHELL)
@@ -64,6 +35,36 @@ fi
 if ask "Change shell to zsh?"; then
     echo "Changing shell to zsh..."
     chsh -s $(which zsh)
+
+    for file in shell/* 
+    do
+        if [ -f "$file" ]; then
+            fullpath=$(realpath $file)
+            if ask "Source ${file}?"; then
+                echo "source $fullpath" >> ~/.zshrc
+            fi
+        fi
+    done
+
+    # Source Distro-specific aliases
+    if ["$os" == "Darwin"]; then
+        echo "Installing MacOS Aliases..."
+        echo "source shell/mac/macos_aliases.sh" >> ~/.zshrc
+    fi
+    else
+        if type apt >/dev/null 2>&1 ; then
+            echo "Installing Ubuntu/Debian Settings..."
+            echo "source shell/debian/debian_aliases.sh" >> ~/.zshrc
+        fi
+        elif type pacman >/dev/null 2>&1 ; then
+            echo "Installing Arch-based Aliases..."
+            echo "source shell/arch/arch_aliases.sh" >> ~/.zshrc
+        fi
+        elif type dnf >/dev/null 2>&1 ; then
+            echo "Installing Fedora Aliases..."
+            echo "source shell/fedora/fedora_aliases.sh" >> ~/.zshrc
+        fi
+    fi
 
     if ask "Install oh-my-zsh?"; then
         echo "Installing oh-my-zsh..."
