@@ -1,5 +1,7 @@
 #!/bin/bash
 
+os=$(uname)
+
 # Ask Y/n
 function ask() {
     read -p "$1 (Y/n): " resp
@@ -12,7 +14,19 @@ function ask() {
     [ "$response_lc" = "y" ]
 }
 
-os=$(uname)
+function install() {
+    if [ "$os" == "Darwin" ]; then
+        brew install $1
+    else
+        if type apt >/dev/null 2>&1 ; then
+            sudo apt install $1
+        elif type pacman >/dev/null 2>&1 ; then
+            sudo pacman -S $1
+        elif type dnf >/dev/null 2>&1 ; then
+            sudo dnf install $1
+        fi
+    fi
+}
 
 echo "Current shell: $SHELL"
 shell=$(basename $SHELL)
@@ -66,6 +80,10 @@ if ask "Change shell to zsh?"; then
 
     if ask "Install oh-my-zsh?"; then
         echo "Installing oh-my-zsh..."
+        if command -v curl >/dev/null 2>&1 ; then
+            # Install curl
+            install curl
+
         # Install oh-my-zsh
         sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     fi
@@ -122,17 +140,7 @@ fi
 
 if ask "Install exa?"; then
     echo "Installing exa..."
-    if ["$os" == "Darwin"]; then
-        brew install exa
-    else
-        if type apt >/dev/null 2>&1 ; then
-            sudo apt install exa
-        elif type pacman >/dev/null 2>&1 ; then
-            sudo pacman -S exa
-        elif type dnf >/dev/null 2>&1 ; then
-            sudo dnf install exa
-        fi
-    fi
+    install exa
 fi
 
 if ask "Install Homebrew?"; then
@@ -148,17 +156,7 @@ fi
 
 if ask "Install tmux?"; then
     echo "Installing tmux..."
-    if [ "$os" == "Darwin" ]; then
-        brew install tmux
-    else
-        if type apt >/dev/null 2>&1 ; then
-            sudo apt install tmux
-        elif type pacman >/dev/null 2>&1 ; then
-            sudo pacman -S tmux
-        elif type dnf >/dev/null 2>&1 ; then
-            sudo dnf install tmux
-        fi
-    fi
+    install tmux
 fi
 
 # Tmux conf
