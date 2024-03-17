@@ -83,7 +83,7 @@ if ask "Change shell to zsh?"; then
         if command -v curl >/dev/null 2>&1 ; then
             # Install curl
             install curl
-
+        fi
         # Install oh-my-zsh
         sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     fi
