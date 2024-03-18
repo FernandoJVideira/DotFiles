@@ -1,7 +1,7 @@
 source vars.sh
 source install_packages.sh
 
-if [ "$os" == "Darwin" ]; then
+if [ "$os" = "Darwin" ]; then
     install_package visual-studio-code        
 else
   case $package_manager in

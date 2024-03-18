@@ -22,7 +22,7 @@ do
     fi
 done
 
-if [ -f /usr/bin/git ]; then
+if command -v git >/dev/null 2>&1; then
     echo "Git is already installed"
 else
     echo "Git is not installed"
@@ -31,7 +31,7 @@ else
     fi
 fi
 
-if [ -f /usr/bin/zsh ]; then
+if command -v zsh >/dev/null 2>&1; then
     echo "Zsh is already installed"
 else
     echo "Zsh is not installed"
@@ -40,16 +40,25 @@ else
     fi
 fi
 
-if ask "Change shell to zsh & install oh-my-zsh?"; then
-    source packages/install_oh_my_zsh.sh
+# Verify if zsh is installed
+if command -v zsh >/dev/null 2>&1; then
+    if ask "Change shell to zsh & install oh-my-zsh?"; then
+        source packages/install_oh_my_zsh.sh
 
-    if ask "Install and set zsh plugins?"; then
-        source packages/install_zsh_plugins.sh
+        if ask "Install and set zsh plugins?"; then
+            source packages/install_zsh_plugins.sh
+        fi
+
+        if ask "Use fzf as the default cd command?"; then
+            fullpath=$(realpath shell/fzf/fzf_cd.sh)
+            echo "source $fullpath" >> ~/.zshrc
+        fi
     fi
+fi
 
-    if ask "Use fzf as the default cd command?"; then
-        fullpath=$(realpath shell/fzf/fzf_cd.sh)
-        echo "source $fullpath" >> ~/.zshrc
+if command -v bash >/dev/null 2>&1 && [ "$shell" = "bash" ]; then
+    if ask "Install oh-my-bash?"; then
+        source packages/install_oh_my_bash.sh
     fi
 fi
 
