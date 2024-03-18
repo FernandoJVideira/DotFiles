@@ -1,4 +1,4 @@
-source vars.sh
+source packages/vars.sh
 
 echo "Installing conda..."
 

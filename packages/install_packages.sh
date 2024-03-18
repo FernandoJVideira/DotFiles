@@ -1,4 +1,4 @@
-source vars.sh
+source packages/vars.sh
 
 function install_package() {
     case $package_manager in

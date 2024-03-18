@@ -1,4 +1,4 @@
-source install_packages.sh
+source packages/install_packages.sh
 
 echo "Installing oh-my-bash..."
 if ! command -v curl >/dev/null 2>&1 ; then

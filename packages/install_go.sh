@@ -1,5 +1,5 @@
-source vars.sh
-source install_packages.sh
+source packages/vars.sh
+source packages/install_packages.sh
 
 CURRENT_VERSION=$(go version | awk '{print $3}')
 VERSION=$(curl -s https://go.dev/dl/?mode=json | jq -r '.[0].version')

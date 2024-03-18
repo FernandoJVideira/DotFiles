@@ -1,5 +1,5 @@
-source vars.sh
-source install_packages.sh
+source packages/vars.sh
+source packages/install_packages.sh
 
 if [ "$package_manager" = "brew" ]; then
     brew install brave-browser
