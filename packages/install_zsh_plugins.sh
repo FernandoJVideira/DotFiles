@@ -1,7 +1,5 @@
 source packages/vars.sh
 
-#Load ZSH plugins
-echo "Installing ZSH plugins..."
 # Install zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 # Install zsh-syntax-highlighting

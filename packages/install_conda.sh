@@ -1,7 +1,5 @@
 source packages/vars.sh
 
-echo "Installing conda..."
-
 declare -A os_name
 os_name=(["Darwin"]="MacOSX-arm64" ["Linux"]="Linux-x86_64")
 

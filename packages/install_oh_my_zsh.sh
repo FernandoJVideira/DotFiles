@@ -1,6 +1,5 @@
 source packages/install_packages.sh
 
-echo "Installing oh-my-zsh..."
 if ! command -v curl >/dev/null 2>&1 ; then
     # Install curl
     install_package curl

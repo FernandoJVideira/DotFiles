@@ -43,13 +43,18 @@ fi
 # Verify if zsh is installed
 if command -v zsh >/dev/null 2>&1; then
     if ask "Change shell to zsh & install oh-my-zsh?"; then
-        source packages/install_oh_my_zsh.sh
+        echo "Changing shell to zsh..."
+        fullpath=$(realpath packages/install_oh_my_zsh.sh)  
+        source $fullpath
 
         if ask "Install and set zsh plugins?"; then
-            source packages/install_zsh_plugins.sh
+            echo "Installing and setting zsh plugins..."
+            fullpath=$(realpath packages/install_zsh_plugins.sh)
+            source $fullpath
         fi
 
         if ask "Use fzf as the default cd command?"; then
+            echo "Using fzf as the default cd command..."
             fullpath=$(realpath shell/fzf/fzf_cd.sh)
             echo "source $fullpath" >> ~/.zshrc
         fi
@@ -58,24 +63,33 @@ fi
 
 if command -v bash >/dev/null 2>&1 && [ "$shell" = "bash" ]; then
     if ask "Install oh-my-bash?"; then
-        source packages/install_oh_my_bash.sh
+        echo "Installing oh-my-bash..."
+        fullpath=$(realpath packages/install_oh_my_bash.sh)
+        source $fullpath
     fi
 fi
 
 if ask "Install Terminal?"; then
-    source packages/install_terminal.sh
+    echo "Installing Terminal..."
+    fullpath=$(realpath packages/install_terminal.sh)
+    source $fullpath
 fi
 
 if ask "Install Fonts?"; then
-    source packages/install_fonts.sh
+    echo "Installing Fonts..."
+    fullpath=$(realpath packages/install_fonts.sh)
+    source $fullpath
 fi
 
 if ask "Install Homebrew?"; then
-    source packages/install_brew.sh
+    echo "Installing Homebrew..."
+    fullpath=$(realpath packages/install_homebrew.sh)
+    source $fullpath
 fi
 
 if ask "Install exa?"; then
     echo "Installing exa..."
+    f
     install_package exa
 fi
 
@@ -90,26 +104,37 @@ if ask "Load .tmux.conf?"; then
 fi
 
 if ask "Install conda?"; then
-    source packages/install_conda.sh
+    echo "Installing conda..."
+    fullpath=$(realpath packages/install_conda.sh)
+    source $fullpath
 fi
 
 if ask "Install VsCode?" ; then
     echo "Installing VsCode..."
-    source install_vscode.sh
+    fullpath=$(realpath packages/install_vscode.sh)
+    source $fullpath
 fi
 
 if ask "Install Go?"; then
-    source packages/install_go.sh
+    echo "Installing Go..."
+    fullpath=$(realpath packages/install_go.sh)
+    source $fullpath
 fi
 
 if ask "Install Node & npm?"; then
-    source packages/install_node.sh
+    echo "Installing Node & npm..."
+    fullpath=$(realpath packages/install_node.sh)
+    source $fullpath
 fi
 
 if ask "Install Docker?"; then
-    source packages/install_docker.sh
+    echo "Installing Docker..."
+    fullpath=$(realpath packages/install_docker.sh)
+    source $fullpath
 fi
 
 if ask "Install Brave?"; then
-    source packages/install_brave.sh
+    echo "Installing Brave..."
+    fullpath=$(realpath packages/install_brave.sh)
+    source $fullpath
 fi
