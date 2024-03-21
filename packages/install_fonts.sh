@@ -1,3 +1,5 @@
+#!/bin/bash
+
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/Hack.zip
 unzip Hack.zip
 cd ../Hack

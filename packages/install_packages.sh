@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source packages/vars.sh
 
 function install_package() {

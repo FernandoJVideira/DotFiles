@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source packages/vars.sh
 
 echo "Installing Homebrew..."

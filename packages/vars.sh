@@ -1,3 +1,5 @@
+#!/bin/bash
+
 export os=$(uname)
 echo "Current shell: $SHELL"
 export shell=$(basename $SHELL)

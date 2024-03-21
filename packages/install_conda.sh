@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source packages/vars.sh
 
 declare -A os_name
