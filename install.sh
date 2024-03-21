@@ -6,6 +6,9 @@ source packages/install_packages.sh
 echo "Detected OS: $os"
 echo "Detected Package Manager: $package_manager"
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+cd "$SCRIPT_DIR"
+
 # Ask Y/n
 function ask() {
     read -p "$1 (Y/n): " resp
@@ -89,7 +92,6 @@ fi
 
 if ask "Install exa?"; then
     echo "Installing exa..."
-    f
     install_package exa
 fi
 
