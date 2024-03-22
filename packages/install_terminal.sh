@@ -9,6 +9,6 @@ if [ "$package_manager" = "brew" ]; then
     cp config/com.googlecode.iterm2.plist ~/Library/Preferences
 else
     install_package kitty
-    fullpath=$(realpath package/config/kitty.conf)
+    fullpath=$(realpath packages/config/kitty.conf)
     cp $fullpath ~/.config/kitty/kitty.conf
 fi
