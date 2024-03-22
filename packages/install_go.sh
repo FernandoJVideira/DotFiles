@@ -3,10 +3,12 @@
 source packages/vars.sh
 source packages/install_packages.sh
 
-CURRENT_VERSION=$(go version | awk '{print $3}')
-VERSION=$(curl -s https://go.dev/dl/?mode=json | jq -r '.[0].version')
+if command -v go >/dev/null 2>&1; then
+  CURRENT_VERSION=$(go version | awk '{print $3}')
+  VERSION=$(curl -s https://go.dev/dl/?mode=json | jq -r '.[0].version')
 
-echo "Current Go version: $CURRENT_VERSION"
+  echo "Current Go version: $CURRENT_VERSION"
+fi
 
 if [ "$CURRENT_VERSION" = "$VERSION" ]; then
   echo "Go is already up to date!"

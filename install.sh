@@ -3,6 +3,10 @@
 source packages/vars.sh
 source packages/install_packages.sh
 
+chmod 777 packages/*
+chmod 777 packages/config/*
+chmod 777 shell/*
+
 echo "Detected OS: $os"
 echo "Detected Package Manager: $package_manager"
 
@@ -11,34 +15,6 @@ function ask() {
     read -p "$1 (Y/n): " resp
     [[ "${resp,,}" =~ ^(y|)$ ]]
 }
-
-for file in shell/* 
-do
-    if [ -f "$file" ]; then
-        fullpath=$(realpath $file)
-        if ask "Source ${file}?"; then
-            echo "source $fullpath" >> ~/.${shell}rc
-        fi
-    fi
-done
-
-if command -v git >/dev/null 2>&1; then
-    echo "Git is already installed"
-else
-    echo "Git is not installed"
-    if ask "Install git?"; then
-        install_package git
-    fi
-fi
-
-if command -v zsh >/dev/null 2>&1; then
-    echo "Zsh is already installed"
-else
-    echo "Zsh is not installed"
-    if ask "Install zsh?"; then
-        install_package zsh
-    fi
-fi
 
 # Verify if zsh is installed
 if command -v zsh >/dev/null 2>&1; then
@@ -56,10 +32,38 @@ if command -v zsh >/dev/null 2>&1; then
     fi
 fi
 
+for file in shell/* 
+do
+    if [ -f "$file" ]; then
+        fullpath=$(realpath $file)
+        if ask "Source ${file}?"; then
+            echo "source $fullpath" >> ~/.${shell}rc
+        fi
+    fi
+done
+
+if command -v zsh >/dev/null 2>&1; then
+    echo "Zsh is already installed"
+else
+    echo "Zsh is not installed"
+    if ask "Install zsh?"; then
+        install_package zsh
+    fi
+fi
+
 if command -v bash >/dev/null 2>&1 && [ "$shell" = "bash" ]; then
     if ask "Install oh-my-bash?"; then
         source packages/install_oh_my_bash.sh
     fi
+fi
+
+if ask "Source Distro Aliases?"; then
+    declare -A distros_aliases
+    distros_aliases=(["brew"]="shell/mac/macos_aliases.sh" ["pacman"]="shell/arch/arch_aliases.sh" ["dnf"]="shell/fedora/fedora_aliases.sh" ["apt"]="shell/debian/debian_aliases.sh")
+
+    echo "Installing $package_manager-based Aliases..."
+    fullpath=$(realpath ${distros_aliases[$package_manager]})
+    echo "source $fullpath" >> ~/.${shell}rc
 fi
 
 if ask "Install Terminal?"; then
@@ -90,7 +94,7 @@ if ask "Load .tmux.conf?"; then
 fi
 
 if ask "Install conda?"; then
-    source packages/install_conda.sh
+    source packages/install_conda2.sh
 fi
 
 if ask "Install VsCode?" ; then
