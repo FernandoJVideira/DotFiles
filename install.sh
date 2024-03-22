@@ -94,7 +94,7 @@ if ask "Load .tmux.conf?"; then
 fi
 
 if ask "Install conda?"; then
-    source packages/install_conda2.sh
+    source packages/install_conda.sh
 fi
 
 if ask "Install VsCode?" ; then

@@ -12,7 +12,6 @@ fi
 
 if [ "$CURRENT_VERSION" = "$VERSION" ]; then
   echo "Go is already up to date!"
-  exit 0
 else
   echo "Go is not installed"
   if [ $package_manager = "brew" ]; then
