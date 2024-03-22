@@ -1,11 +1,11 @@
 #!/bin/bash
 
+sudo chmod 777 packages/*
+sudo chmod 777 packages/config/*
+sudo chmod 777 shell/*
+
 source packages/vars.sh
 source packages/install_packages.sh
-
-chmod 777 packages/*
-chmod 777 packages/config/*
-chmod 777 shell/*
 
 echo "Detected OS: $os"
 echo "Detected Package Manager: $package_manager"
