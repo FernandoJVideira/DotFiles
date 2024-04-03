@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source packages/vars.sh
-source packages/install_packages.sh
+utils/vars.sh
+source utils/install_packages.sh
 
 if command -v go >/dev/null 2>&1; then
   CURRENT_VERSION=$(go version | awk '{print $3}')

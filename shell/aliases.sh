@@ -1,13 +1,18 @@
 #General (All OSes)
-# Check if exa is installed
-if command -v exa >/dev/null 2>&1; then
-    alias ls="exa"
-fi
-
+alias ls="eza -l --git --icons=always --group-directories-first"
 alias c="clear"
 
-if command -v brew >/dev/null 2>&1; then
-  alias bupd="brew update && brew upgrade"
-  alias bi="brew install"
-  alias bs="brew search"
-fi
+alias cpi="cp -iv"
+alias mvi="mv -iv"
+alias rm="rm -i"
+
+alias back="cd .."
+alias back2="cd ../../"
+alias home="cd ~"
+alias root="cd /"
+alias dev="cd ~/Developer"
+
+# Brew Aliases
+alias bupd="brew update && brew upgrade"
+alias bi="brew install"
+alias bs="brew search"

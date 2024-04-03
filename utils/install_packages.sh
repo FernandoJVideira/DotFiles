@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source packages/vars.sh
+utils/vars.sh
 
 function install_package() {
     case $package_manager in
