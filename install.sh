@@ -4,7 +4,6 @@ sudo chmod 777 packages/*
 sudo chmod 777 packages/config/*
 sudo chmod 777 shell/*
 
-utils/vars.sh
 source utils/install_packages.sh
 source utils/utils.sh
 
