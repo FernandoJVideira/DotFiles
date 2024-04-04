@@ -7,10 +7,10 @@ source utils/install_packages.sh
 # Install fonts
 echo "Installing fonts..."
 
-if [ "$os" = "Darwin"]; then
-sudo mv ./fonts/* /Library/Fonts
+if [ "$os" = "Darwin" ]; then
+sudo mv packages/fonts/* /Library/Fonts
 else
-sudo mv ./fonts/* /usr/share/fonts
+sudo mv packages/fonts/* /usr/share/fonts
 fi
 
 rm -rf ./fonts
@@ -23,5 +23,5 @@ install_package neofetch
 install_package htop
 install_package unzip
 install_package eza
-source ./brew.sh
-source ./brave.sh
+source packages/brew.sh
+source packages/brave.sh

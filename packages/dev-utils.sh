@@ -5,8 +5,8 @@ source utils/install_packages.sh
 
 # Install dev utils
 echo "Installing dev utils..."
-source ./conda.sh
-source ./docker.sh
-source ./terminal.sh 
+source packages/conda.sh
+source packages/docker.sh
+source packages/terminal.sh 
 install_package curl
 install_package tmux
