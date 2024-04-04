@@ -31,7 +31,7 @@ export PS1="%n$"
 
 # Load zsh plugins
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search gh macos)  
-source $ZSH/plugins/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+source $ZSH_CUSTOM/plugins/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 source $ZSH/oh-my-zsh.sh
 
 # User configuration

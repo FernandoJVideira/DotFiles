@@ -4,8 +4,10 @@ sudo chmod 777 packages/*
 sudo chmod 777 packages/config/*
 sudo chmod 777 shell/*
 
-utils/vars.sh
+source utils/vars.sh
 source utils/install_packages.sh
+source packages.sh
+
 source utils/utils.sh
 
 echo "Detected OS: $os"
@@ -27,7 +29,7 @@ do
     if [ -f "$file" ]; then
         fullpath=$(realpath $file)
         if ask "Source ${file}?"; then
-            echo "source $fullpath" >> ~/.$zshrc
+            echo "source $fullpath" >> ~/.zshrc
         fi
     fi
 done
@@ -37,7 +39,13 @@ distros_aliases=(["brew"]="shell/mac/macos_aliases.sh" ["pacman"]="shell/arch/ar
 
 echo "Installing $package_manager-based Aliases..."
 fullpath=$(realpath ${distros_aliases[$package_manager]})
-echo "source $fullpath" >> ~/.$zshrc
+echo "source $fullpath" >> ~/.zshrc
+
+
+if package_manager = "pacman"; then
+    echo "Installing yay..."
+    pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+fi
 
 echo "Installing Packages..."
 for package in "${PACKAGES[@]}"; do
