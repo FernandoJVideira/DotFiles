@@ -8,5 +8,5 @@ echo "Installing dev utils..."
 source packages/conda.sh
 source packages/docker.sh
 source packages/terminal.sh 
-install_package curl
 install_package tmux
+install_package goenv

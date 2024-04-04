@@ -2,7 +2,6 @@
 
 source utils/vars.sh
 source utils/install_packages.sh
-source packages.sh
 
 source utils/utils.sh
 

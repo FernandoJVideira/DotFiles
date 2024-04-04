@@ -1,11 +1,13 @@
+#Get OS
+$os="$(uname)"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
 #MacOS Path
-if [[ "$(uname)" == "Darwin" ]]; then
+if [ "$os" = "Darwin" ]; then
     export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
     export PATH="$PATH:$HOME/velox"
     #Go Path
@@ -31,7 +33,7 @@ export PS1="%n$"
 
 # Load zsh plugins
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search gh macos)  
-source $ZSH_CUSTOM/plugins/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+source $ZSH/plugins/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -53,24 +55,18 @@ eval "$(goenv init -)"
 #Conda Config
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-#Check if running macOS or Linux
-if [[ "$(uname)" == "Darwin" ]]; then
-    homeDir="Users"
-    condaDir="miniforge3"
-else
-    homeDir="home"
-    condaDir="miniconda3"
-fi
+homeDir=(["Darwin"]="Users" ["Linux"]="home")
+condaDir=(["Darwin"]="miniforge3" ["Linux"]="miniconda3")
 
 #Miniconda Config
 __conda_setup="$('/$homeDir/fernandovideira/$condaDir/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/$homeDir/fernandovideira/$condaDir/etc/profile.d/conda.sh" ]; then
-        . "/$homeDir/fernandovideira/$condaDir/etc/profile.d/conda.sh"
+    if [ -f "/${homeDir[$os]}/fernandovideira/${condaDir[$os]}/etc/profile.d/conda.sh" ]; then
+        . "/${homeDir[$os]}/fernandovideira/${condaDir[$os]}/etc/profile.d/conda.sh"
     else
-        export PATH="/$homeDir/fernandovideira/$condaDir/bin:$PATH"
+        export PATH="/${homeDir[$os]}/fernandovideira/${condaDir[$os]}/bin:$PATH"
     fi
 fi
 unset __conda_setup

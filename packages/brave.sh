@@ -3,7 +3,7 @@
 source utils/install_packages.sh
 
 if [ "$package_manager" = "brew" ]; then
-    brew install brave-browser
+    install_package brave-browser
 else
   if [ "$package_manager" = "apt" ]; then
     sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-utils/vars.sh
 source utils/install_packages.sh
 
 if [ "$package_manager" = "brew" ]; then

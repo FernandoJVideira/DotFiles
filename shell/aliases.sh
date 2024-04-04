@@ -1,6 +1,8 @@
 #General (All OSes)
 alias ls="eza -l --git --icons=always --group-directories-first"
 alias c="clear"
+alias m="make"
+alias mc="make clean"
 
 alias cpi="cp -iv"
 alias mvi="mv -iv"

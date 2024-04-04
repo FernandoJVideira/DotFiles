@@ -13,7 +13,7 @@ else
 sudo mv packages/fonts/* /usr/share/fonts
 fi
 
-rm -rf ./fonts
+rm -f packages/fonts
 echo "Fonts installed."
 
 # Install system packages
