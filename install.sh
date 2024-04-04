@@ -1,9 +1,5 @@
 #!/bin/bash
 
-sudo chmod 777 packages/*
-sudo chmod 777 packages/config/*
-sudo chmod 777 shell/*
-
 source utils/vars.sh
 source utils/install_packages.sh
 source packages.sh
@@ -29,6 +25,7 @@ do
     if [ -f "$file" ]; then
         fullpath=$(realpath $file)
         if ask "Source ${file}?"; then
+            echo
             echo "source $fullpath" >> ~/.zshrc
         fi
     fi
@@ -39,9 +36,9 @@ distros_aliases=(["brew"]="shell/mac/macos_aliases.sh" ["pacman"]="shell/arch/ar
 
 echo "Installing $package_manager-based Aliases..."
 fullpath=$(realpath ${distros_aliases[$package_manager]})
+echo
 echo "source $fullpath" >> ~/.zshrc
 
-echo "Package manager: '$package_manager'"
 if [ "$package_manager" = "pacman" ]; then
     echo "Installing yay..."
     sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
