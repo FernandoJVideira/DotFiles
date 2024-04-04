@@ -55,7 +55,9 @@ eval "$(goenv init -)"
 #Conda Config
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
+declare -A homeDir
 homeDir=(["Darwin"]="Users" ["Linux"]="home")
+declare -A condaDir
 condaDir=(["Darwin"]="miniforge3" ["Linux"]="miniconda3")
 
 #Miniconda Config
