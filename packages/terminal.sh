@@ -9,5 +9,5 @@ if [ "$package_manager" = "brew" ]; then
     cp config/com.googlecode.iterm2.plist ~/Library/Preferences
 else
     install_package kitty
-    cd .. && stow kitty
+    stow kitty
 fi

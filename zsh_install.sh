@@ -12,7 +12,7 @@ fi
 
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     echo "Oh My Zsh is not installed. Installing Oh My Zsh..."
-    source packages/install_oh-my-zsh.sh
+    source packages/oh-my-zsh.sh
 fi
 
 if [ ! -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]; then

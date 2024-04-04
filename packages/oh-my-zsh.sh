@@ -1,8 +1,9 @@
 #!/bin/bash
 
 source utils/install_packages.sh
+source utils/utils.sh
 
-if ! command -v curl >/dev/null 2>&1 ; then
+if ! command_check "curl"; then
     # Install curl
     install_package curl
 fi

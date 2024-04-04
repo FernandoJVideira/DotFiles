@@ -15,13 +15,13 @@ echo "Detected Package Manager: $package_manager"
 
 echo "Removing old config files..."
 rm -rf ~/.zshrc ~/.p10k.zsh ~/.tmux.conf
-source packages/install_stow.sh
+install_package stow
 
 echo "Stowing Config Files..."
 stow home
 
 echo "Installing Zsh plugins..."
-source packages/install_zsh_plugins.sh
+source packages/zsh_plugins.sh
 
 echo "Adding Aliases to zshrc..."
 for file in shell/* 
@@ -41,15 +41,15 @@ echo "Installing $package_manager-based Aliases..."
 fullpath=$(realpath ${distros_aliases[$package_manager]})
 echo "source $fullpath" >> ~/.zshrc
 
-
-if package_manager = "pacman"; then
+echo "Package manager: '$package_manager'"
+if [ "$package_manager" = "pacman" ]; then
     echo "Installing yay..."
-    pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+    sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 fi
 
 echo "Installing Packages..."
 for package in "${PACKAGES[@]}"; do
     if ask "Install $package?"; then
-        source packages/install_$package.sh
+        source packages/$package.sh
     fi
 done
