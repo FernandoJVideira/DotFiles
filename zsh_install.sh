@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source utils/vars.sh
 source utils/utils.sh
 source utils/install_packages.sh
 

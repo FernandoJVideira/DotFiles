@@ -50,8 +50,6 @@ fcd() {
     fi
 }
 
-eval "$(goenv init -)"
-
 #Conda Config
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
