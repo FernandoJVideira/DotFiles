@@ -21,3 +21,9 @@ PACKAGES=(
   "programming"
 )
 export PACKAGES
+
+MAC_PACKAGES=(
+  "sketchybar"
+  "yabai"
+)
+export MAC_PACKAGES

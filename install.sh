@@ -15,6 +15,12 @@ install_package stow
 echo "Stowing Config Files..."
 stow home
 
+if [ "$os" = "macos" ]; then
+    source packages/sketchybar.sh
+    stow sketchybar
+    source shell/sketchybarzshconfig.sh >> ~/.zshrc
+fi
+
 echo "Installing Zsh plugins..."
 source packages/zsh_plugins.sh
 
@@ -29,6 +35,7 @@ do
         fi
     fi
 done
+
 echo "Setting Distros Aliases..."
 declare -A distros_aliases
 distros_aliases=(["brew"]="shell/mac/macos_aliases.sh" ["pacman"]="shell/arch/arch_aliases.sh" ["dnf"]="shell/fedora/fedora_aliases.sh" ["apt"]="shell/debian/debian_aliases.sh")
@@ -43,9 +50,22 @@ if [ "$package_manager" = "pacman" ]; then
     sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 fi
 
-echo "Installing Packages..."
+echo "Installing General Packages..."
 for package in "${PACKAGES[@]}"; do
     if ask "Install $package?"; then
         source packages/$package.sh
     fi
 done
+
+if [ "$os" = "macos" ]; then
+    echo "Installing Mac-Specific Packages..."
+    for package in "${MAC_PACKAGES[@]}"; do
+    if ask "Install $package?"; then
+        source macpackages/$package.sh
+        fi
+    done
+
+    echo "Stowing Mac-Specific Config Files..."
+    stow yabai
+    stow skhd
+fi
