@@ -8,6 +8,8 @@ source utils/utils.sh
 echo "Detected OS: $os"
 echo "Detected Package Manager: $package_manager"
 
+source utils/zsh_install.sh
+
 echo "Removing old config files..."
 rm -rf ~/.zshrc ~/.p10k.zsh ~/.tmux.conf
 install_package stow
@@ -15,16 +17,10 @@ install_package stow
 echo "Stowing Config Files..."
 stow home
 
-if [ "$os" = "macos" ]; then
-    source packages/sketchybar.sh
-    stow sketchybar
-    source shell/sketchybarzshconfig.sh >> ~/.zshrc
-fi
+echo "Installing Homebrew..."
+source packages/brew.sh
 
-echo "Installing Zsh plugins..."
-source packages/zsh_plugins.sh
-
-echo "Adding Aliases to zshrc..."
+echo "Adding General Aliases to zshrc..."
 for file in shell/* 
 do
     if [ -f "$file" ]; then
@@ -40,7 +36,7 @@ echo "Setting Distros Aliases..."
 declare -A distros_aliases
 distros_aliases=(["brew"]="shell/mac/macos_aliases.sh" ["pacman"]="shell/arch/arch_aliases.sh" ["dnf"]="shell/fedora/fedora_aliases.sh" ["apt"]="shell/debian/debian_aliases.sh")
 
-echo "Installing $package_manager-based Aliases..."
+echo "Setting $package_manager-based Aliases..."
 fullpath=$(realpath ${distros_aliases[$package_manager]})
 echo
 echo "source $fullpath" >> ~/.zshrc
@@ -57,13 +53,17 @@ for package in "${PACKAGES[@]}"; do
     fi
 done
 
-if [ "$os" = "macos" ]; then
+if [ "$os" = "Darwin" ]; then
     echo "Installing Mac-Specific Packages..."
     for package in "${MAC_PACKAGES[@]}"; do
     if ask "Install $package?"; then
         source macpackages/$package.sh
         fi
     done
+
+    source packages/sketchybar.sh
+    stow sketchybar
+    source shell/sketchybarzshconfig.sh >> ~/.zshrc
 
     echo "Stowing Mac-Specific Config Files..."
     stow yabai

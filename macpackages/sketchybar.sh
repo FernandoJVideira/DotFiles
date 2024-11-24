@@ -9,5 +9,5 @@ install_package jq
 install_package ifstat
 install_package gh
 
-echo "Installing Sketchybar..."
-brew install sketchybar
+echo "Installing Sketchybar..." 
+install_package sketchybar

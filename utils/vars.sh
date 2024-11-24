@@ -24,6 +24,8 @@ export PACKAGES
 
 MAC_PACKAGES=(
   "sketchybar"
+  "skhd"
   "yabai"
+  "wezterm"
 )
 export MAC_PACKAGES

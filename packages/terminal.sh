@@ -2,11 +2,20 @@
 
 source utils/install_packages.sh
 
-if [ "$package_manager" = "brew" ]; then
-    install_package iterm2
-    install_package warp
-    cp config/com.googlecode.iterm2.plist ~/Library/Preferences
-else
-    install_package kitty
-    stow kitty
-fi
+echo "Installing Wezterm packages..."
+brew install wezterm
+brew install starship
+
+echo "Stowing config..."
+stow wezterm
+stow starship.toml
+
+echo "Installing Zsh plugins..."
+brew install zsh-autosuggestions
+brew install zsh-syntax-highlighting
+
+echo "Zsh plugins installed."
+
+echo "Adding config to .zshrc..."
+echo "source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
+echo "source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc

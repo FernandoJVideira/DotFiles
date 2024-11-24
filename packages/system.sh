@@ -18,10 +18,13 @@ echo "Fonts installed."
 
 # Install system packages
 echo "Installing system packages..."
-install_package discord
-install_package neofetch
-install_package htop
+
+echo "Installing fastfetch..."
+install_package fastfetch
+echo "Stowing config..."
+stow fastfetch
+
+install_package btop
 install_package unzip
 install_package eza
-source packages/brew.sh
 source packages/brave.sh
