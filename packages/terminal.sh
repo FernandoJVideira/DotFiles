@@ -8,7 +8,7 @@ echo "Installing Wezterm packages..."
 if [ "$os" = "Darwin" ]; then
     brew install --cask wezterm
     brew install starship
-elif [ "$os" = "Linux" ]; then
+else
     brew tap wez/wezterm-linuxbrew
     brew install wezterm
 fi

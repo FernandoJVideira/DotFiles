@@ -1,6 +1,6 @@
 #!/bin/bash
 
-utils/vars.sh
+source utils/vars.sh
 source utils/install_packages.sh
 
 if command -v go >/dev/null 2>&1; then

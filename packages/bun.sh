@@ -3,12 +3,8 @@
 source utils/vars.sh
 source utils/install_packages.sh
 
-echo "Installing Starship..."
-
-if [ ! check_command "curl" ]; then
-    install_package curl
-fi
+echo "Installing Bun..."
 
 curl -fsSL https://bun.sh/install | sh
 
-echo "Starship installed successfully."
+echo "Bun installed successfully."
