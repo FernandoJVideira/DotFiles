@@ -5,6 +5,6 @@ source utils/install_packages.sh
 
 echo "Installing Bun..."
 
-curl -fsSL https://bun.sh/install | sh
+curl -Ss https://bun.sh/install | sh
 
 echo "Bun installed successfully."

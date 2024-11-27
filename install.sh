@@ -10,6 +10,8 @@ echo "Detected Package Manager: $package_manager"
 
 source utils/zsh_install.sh
 
+
+
 echo "Removing old config files..."
 rm -rf ~/.zshrc ~/.p10k.zsh ~/.tmux.conf
 
@@ -29,6 +31,11 @@ fi
 
 echo "Installing Homebrew..."
 source packages/brew.sh
+ 
+echo "Homebrew installed! Restarting the shell and re-executing the script..."
+# Restart the shell and re-execute the script
+exec zsh -c "source ~/.zshrc && $0"
+
 
 echo "Adding General Aliases to zshrc..."
 for file in shell/* 
@@ -46,10 +53,13 @@ echo "Setting Distros Aliases..."
 declare -A distros_aliases
 distros_aliases=(["brew"]="shell/mac/macos_aliases.sh" ["pacman"]="shell/arch/arch_aliases.sh" ["dnf"]="shell/fedora/fedora_aliases.sh" ["apt"]="shell/debian/debian_aliases.sh")
 
-echo "Setting $package_manager-based Aliases..."
-fullpath=$(realpath ${distros_aliases[$package_manager]})
-echo
-echo "source $fullpath" >> ~/.zshrc
+if ask "Install $package_manager-based aliases?"; then
+    echo "Installing $package_manager-based aliases..."
+    echo
+    fullpath=$(realpath ${distros_aliases[$package_manager]})
+    echo
+    echo "source $fullpath" >> ~/.zshrc
+fi
 
 if [ "$package_manager" = "pacman" ]; then
     echo "Installing yay..."
