@@ -5,7 +5,6 @@ source utils/install_packages.sh
 
 # List of packages to install
 SYSPACKAGES=(
-  "fastfetch"
   "btop"
   "unzip"
   "eza"
@@ -30,6 +29,8 @@ for package in "${SYSPACKAGES[@]}"; do
   fi
 done
 
+brew install fastfetch
+brew install zoxide
 source packages/terminal.sh
 source packages/starship.sh
 source packages/zen-browser.sh
