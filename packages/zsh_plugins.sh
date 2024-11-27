@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# Install zsh-autosuggestions
-echo "Installing zsh-autosuggestions..."
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-echo "zsh-autosuggestions installed!"
+echo "Installing Zsh plugins..."
+brew install zsh-autosuggestions
+brew install zsh-syntax-highlighting
 
-echo "Install zsh-completions..."
-# Install zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-echo "zsh-syntax-highlighting installed!"
+echo "Zsh plugins installed."
+
+echo "Adding config to .zshrc..."
+echo "source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
+echo "source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ~/.zshrc
 
 # Install fzf
 echo "Installing fzf..."

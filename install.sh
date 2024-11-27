@@ -12,10 +12,17 @@ source utils/zsh_install.sh
 
 echo "Removing old config files..."
 rm -rf ~/.zshrc ~/.p10k.zsh ~/.tmux.conf
+
+echo "Installing Stow..."
 install_package stow
 
-echo "Stowing Config Files..."
-stow home
+if [ "$os" = "Darwin" ]; then
+    echo "Setting up MacOS..."
+    stow darwin
+else
+    echo "Setting up Linux..."
+    stow linux
+fi
 
 echo "Installing Homebrew..."
 source packages/brew.sh
@@ -60,12 +67,4 @@ if [ "$os" = "Darwin" ]; then
         source macpackages/$package.sh
         fi
     done
-
-    source packages/sketchybar.sh
-    stow sketchybar
-    source shell/sketchybarzshconfig.sh >> ~/.zshrc
-
-    echo "Stowing Mac-Specific Config Files..."
-    stow yabai
-    stow skhd
 fi
