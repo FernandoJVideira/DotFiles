@@ -8,34 +8,34 @@ source utils/utils.sh
 echo "Detected OS: $os"
 echo "Detected Package Manager: $package_manager"
 
-source utils/zsh_install.sh
+# Check if the script should start from the middle
+if [ "$1" != "continue" ]; then
+    source utils/zsh_install.sh
 
+    echo "Removing old config files..."
+    rm -rf ~/.zshrc ~/.p10k.zsh ~/.tmux.conf
 
+    echo "Installing Stow..."
+    install_package stow
 
-echo "Removing old config files..."
-rm -rf ~/.zshrc ~/.p10k.zsh ~/.tmux.conf
+    echo "Installing curl..."
+    install_package curl
 
-echo "Installing Stow..."
-install_package stow
+    if [ "$os" = "Darwin" ]; then
+        echo "Setting up MacOS..."
+        stow darwin
+    else
+        echo "Setting up Linux..."
+        stow linux
+    fi
 
-echo "Installing curl..."
-install_package curl
+    echo "Installing Homebrew..."
+    source packages/brew.sh
 
-if [ "$os" = "Darwin" ]; then
-    echo "Setting up MacOS..."
-    stow darwin
-else
-    echo "Setting up Linux..."
-    stow linux
+    echo "Homebrew installed! Restarting the shell and re-executing the script..."
+    # Restart the shell and re-execute the script from this point
+    exec zsh -c "source ~/.zshrc && $0 continue"
 fi
-
-echo "Installing Homebrew..."
-source packages/brew.sh
- 
-echo "Homebrew installed! Restarting the shell and re-executing the script..."
-# Restart the shell and re-execute the script
-exec zsh -c "source ~/.zshrc && $0"
-
 
 echo "Adding General Aliases to zshrc..."
 for file in shell/* 

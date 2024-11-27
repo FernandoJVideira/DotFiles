@@ -23,6 +23,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh --cmd cd)"
 eval "$(thefuck --alias)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 #Conda Config
 # >>> conda initialize >>>

@@ -26,3 +26,4 @@ unset __conda_setup
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh --cmd cd)"
 eval "$(thefuck --alias)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
