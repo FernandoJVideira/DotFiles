@@ -25,5 +25,21 @@ export PACKAGES
 MAC_PACKAGES=(
   "sketchybar"
   "aerospace" 
+  "1password"
+  "blender"
+  "docker"
+  "font-sf-pro"
+  "font-sf-mono"
+  "font-inter"
+  "goland"
+  "hoppscotch"
+  "intellij-idea"
+  "keka"
+  "obsidian"
+  "ollama"
+  "onlyoffice"
+  "raycast"
+  "slack"
+  "zen-browser"
 )
 export MAC_PACKAGES

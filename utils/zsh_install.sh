@@ -1,8 +1,8 @@
 #!/bin/bash
 
-source vars.sh
-source utils.sh
-source install_packages.sh
+source utils/vars.sh
+source utils/utils.sh
+source utils/install_packages.sh
 
 # Verify if zsh is installed
 if ! check_command "zsh" ; then

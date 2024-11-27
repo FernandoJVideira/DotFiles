@@ -9,7 +9,7 @@ SYSPACKAGES=(
   "btop"
   "unzip"
   "eza"
-  "wezterm"
+  "libreoffice"
 )
 
 # Install fonts
@@ -29,5 +29,7 @@ for package in "${SYSPACKAGES[@]}"; do
     install_package $package
   fi
 done
+
+source packages/terminal.sh
 source packages/starship.sh
-source packages/brave.sh
+source packages/zen-browser.sh

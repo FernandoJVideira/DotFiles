@@ -16,6 +16,9 @@ rm -rf ~/.zshrc ~/.p10k.zsh ~/.tmux.conf
 echo "Installing Stow..."
 install_package stow
 
+echo "Installing curl..."
+install_package curl
+
 if [ "$os" = "Darwin" ]; then
     echo "Setting up MacOS..."
     stow darwin
